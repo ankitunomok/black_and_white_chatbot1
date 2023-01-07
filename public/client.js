@@ -38,7 +38,7 @@ var Botkit = {
                 if (xmlhttp.readyState == XMLHttpRequest.DONE) {
                     if (xmlhttp.status == 200) {
                         var response = xmlhttp.responseText;
-                        if (response !='') {
+                        if (response != '') {
                             var message = null;
                             try {
                                 message = JSON.parse(response);
@@ -239,9 +239,18 @@ var Botkit = {
     },
     renderMessage: function (message) {
         var that = this;
+        console.log(message)
         if (!that.next_line) {
             that.next_line = document.createElement('div');
+            if (message.type && message.type === "outgoing") {
+                that.next_line.classList.add('outgoingmain');
+            }
+            // console.log("message : ", message)
             that.message_list.appendChild(that.next_line);
+        }
+        if (message.type && message.type === "message") {
+            console.log("message ....")
+            that.next_line.classList.add('messagemain');
         }
         if (message.text) {
             message.html = converter.makeHtml(message.text);

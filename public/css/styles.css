@@ -220,7 +220,7 @@ a.button:hover {
   line-height: 1.3rem;
   background: #000000;
   color: #ffffff;
-  border-radius: 5px;
+  border-radius: 15px;
   width: auto;
   display: inline-block;
   max-width: 75%;
@@ -279,6 +279,29 @@ a.button:hover {
   width: 35px;
   border-radius: 50%;
 }
+#message_window .avataroutgoing {
+  margin-top: 10px;
+  background: #f0f0f0;
+  float: right;
+  margin-right: 2px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+}
+
+#message_window .outgoingmain {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+}
+
+#message_window .messagemain {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  gap: 20px;
+}
+
 #message_window #message_replies ul {
   list-style-type: none;
   margin: 0px auto;

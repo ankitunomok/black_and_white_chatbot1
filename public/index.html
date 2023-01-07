@@ -67,18 +67,36 @@
 			function setUI() {
 				var someTag = $('div.message.message').parent();
 				var prev = null;
+				console.log("incoming : ", $('div.message.message').parent())
+				console.log("outgoing : ", $('div.message.outgoing').parent())
 				someTag.each(function (index, element) {
 					element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
-
-					if ($(element).find('.outgoing').length > 0) {
-						return;
-					}
+					console.log("Length :", ($(element).find('.message.message').find('messageCorner').length));
+					console.log("Element :", ($(element).find('.message.message').children(".messageCorner").length))
 					if ($(element).find('.typing-indicator').length > 0) {
 						return;
 					}
 
+					if ($(element).find('.message.message').children(".messageCorner").length == 0) {
+						var styleCorner = document.createElement("div");
+						styleCorner
+							.classList
+							.add("messageCorner");
+						$(element)
+							.find('.message.message')
+							.append(styleCorner);
+					}
+
+					if (($(element).find('.outgoing').length > 0) && $(element).find('img').length == 0) {
+						$(element).prepend("<div class=avataroutgoing><img style='vertical-align: middle; height: 40px; width:40px;border: 1px solid black;border-radius: 50%;padding:2px;' src='./img/person.png'/></div>");
+					} else if ($(element).find('.avatar').length == 0) {
+						$(element)
+							.find('.message.outgoing')
+							.css('margin-left', '35px');
+					}
+
 					if (($(prev).find('.message').length > 0 || index == 1) && $(element).find('img').length == 0) {
-						$(element).prepend("<span class=avatar><img style='vertical-align: middle; height: 40px; width:40px;border: 1px solid black;border-radius: 50%;padding:2px;' src='./img/chaticon.png'/></div>");
+						$(element).prepend("<div class=avatar><img style='vertical-align: middle; height: 40px; width:40px;border: 1px solid black;border-radius: 50%;padding:2px;' src='./img/chaticon.png'/></div>");
 					} else if ($(element).find('.avatar').length == 0) {
 						$(element)
 							.find('.message.message')
