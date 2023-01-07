@@ -1,0 +1,92 @@
+<html>
+	<head>
+		<title>Botkit Anywhere</title>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.min.js"></script>
+		<script src="https://cdn.rawgit.com/showdownjs/showdown/1.7.4/dist/showdown.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="/css/styles.css"/>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+	<body >
+		<div class="wrapper">
+
+			<div id="message_window">
+				<div class="disconnected">
+                Disconnected... reconnecting!
+            </div>
+				<div class="offline">
+                Offline! Reload to reconnect.
+            </div>
+				<section>
+					<div id="message_list">
+						<div id="message_template">
+							<div class="message {{message.type}}">
+								{{#if message.isTyping}}
+									<div class="typing-indicator">
+										<span></span>
+										<span></span>
+										<span></span>
+									</div>
+								{{/if}}
+								{{{message.html}}}
+
+								{{#if message.open_link}}
+									<a href="{{{message.open_link}}}" target="_blank" class="button_message">
+										{{#if message.link_title}}{{message.link_title}}
+										{{else}}{{message.open_link}}
+										{{/if}}
+									</a>
+								{{/if}}
+							</div>
+							{{#message.files}}
+								<div class="file_attachment">
+									{{#if image}}
+										<img src="{{{url}}}" alt="{{{url}}}"/>
+									{{else}}
+										<a href="{{{url}}}" title="{{{url}}}">{{{url}}}</a>
+									{{/if}}
+								</div>
+							{{/message.files}}
+						</div>
+					</div>
+				</section>
+				<div id="message_replies"></div>
+				<footer>
+					<form onsubmit="Botkit.send(Botkit.input.value, event)">
+						<input type="text" autocomplete="off" id="messenger_input" placeholder="Type here..."/>
+						<button type="submit">
+							<img class="button-logo" src="./img/icon.png" height="20px"/>
+						</button>
+					</form>
+				</footer>
+			</div>
+		</div>
+		<script src="/client.js"></script>
+		<script>
+			function setUI() {
+				var someTag = $('div.message.message').parent();
+				var prev = null;
+				someTag.each(function (index, element) {
+					element.scrollIntoView({behavior: "smooth", block: "end", inline: "nearest"});
+
+					if ($(element).find('.outgoing').length > 0) {
+						return;
+					}
+					if ($(element).find('.typing-indicator').length > 0) {
+						return;
+					}
+
+					if (($(prev).find('.message').length > 0 || index == 1) && $(element).find('img').length == 0) {
+						$(element).prepend("<span class=avatar><img style='vertical-align: middle; height: 40px; width:40px;border: 1px solid black;border-radius: 50%;padding:2px;' src='./img/chaticon.png'/></div>");
+					} else if ($(element).find('.avatar').length == 0) {
+						$(element)
+							.find('.message.message')
+							.css('margin-left', '35px');
+					}
+					prev = this;
+				});
+			}
+		</script>
+	</body>
+</html>
