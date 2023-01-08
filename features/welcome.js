@@ -128,11 +128,36 @@ module.exports = function (controller) {
 
 	welcomeConvo.after(async (results, bot) => {
 		if (results.varAge !== 'No') {
-			console.log("verify Age : ", results.varAge);
-			console.log("name : ", results.varName);
-			console.log("number : ", results.varNumber);
-			console.log("code : ", results.varCode);
-			console.log("ans : ", results.varAns);
+			// console.log("verify Age : ", results.varAge);
+			// console.log("name : ", results.varName);
+			// console.log("number : ", results.varNumber);
+			// console.log("code : ", results.varCode);
+			// console.log("ans : ", results.varAns);
+
+			var data = JSON.stringify({
+				"name": results.varName,
+				"contact_number": results.varNumber,
+				"legal_drink_age": true,
+				"answer": results.varAns
+			});
+
+			var config = {
+				method: 'post',
+				url: 'https://backend.unomok.com/items/black_white_hyderabad',
+				headers: {
+					'Authorization': 'Bearer apiuser',
+					'Content-Type': 'application/json'
+				},
+				data: data
+			};
+
+			axios(config)
+				.then(function (response) {
+					console.log(JSON.stringify(response.data));
+				})
+				.catch(function (error) {
+					console.log(error);
+				});
 
 			// var config = {
 			// 	method: 'post',

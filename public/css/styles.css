@@ -13,10 +13,6 @@ html {
 }
 
 .wrapper {
-  background-image: url(../img/background.jpg);
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: scroll;
   position: relative;
   max-width: 1000px;
   margin: 0 auto;
@@ -129,9 +125,13 @@ a.button:hover {
 
 /* chat client */
 #message_window {
-  background: url("../images/bg-img.png") no-repeat fixed center top;
+  /* background: url("../images/bg-img.png") no-repeat fixed center top; */
   /*height: 500px;
   width: 320px;*/
+  background-image: url(../img/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
   height: 100%;
   width: 100%;
   /*margin: 2rem auto;*/
@@ -220,10 +220,14 @@ a.button:hover {
   line-height: 1.3rem;
   background: #000000;
   color: #ffffff;
+  /* background-repeat: no-repeat; */
+  /* background-size: cover; */
   border-radius: 15px;
   width: auto;
   display: inline-block;
   max-width: 75%;
+  /* clip-path: url(#filter0_d_3_77); */
+  /* background-image: url(../img/chat.svg); */
   font-weight: 600;
 }
 #message_window .file_attachment {

@@ -242,11 +242,11 @@ var Botkit = {
         console.log(message)
         if (!that.next_line) {
             that.next_line = document.createElement('div');
-            if (message.type && message.type === "outgoing") {
-                that.next_line.classList.add('outgoingmain');
-            }
             // console.log("message : ", message)
             that.message_list.appendChild(that.next_line);
+        }
+        if (message.type && message.type === "outgoing") {
+            that.next_line.classList.add('outgoingmain');
         }
         if (message.type && message.type === "message") {
             console.log("message ....")
