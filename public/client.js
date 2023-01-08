@@ -239,7 +239,7 @@ var Botkit = {
     },
     renderMessage: function (message) {
         var that = this;
-        console.log(message)
+        // console.log(message)
         if (!that.next_line) {
             that.next_line = document.createElement('div');
             // console.log("message : ", message)
@@ -249,7 +249,7 @@ var Botkit = {
             that.next_line.classList.add('outgoingmain');
         }
         if (message.type && message.type === "message") {
-            console.log("message ....")
+            // console.log("message ....")
             that.next_line.classList.add('messagemain');
         }
         if (message.text) {
@@ -401,7 +401,7 @@ var Botkit = {
 
         that.on('message', function (message) {
 
-            console.log('RECEIVED MESSAGE', message);
+            // console.log('RECEIVED MESSAGE', message);
             that.renderMessage(message);
 
         });
